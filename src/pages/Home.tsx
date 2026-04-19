@@ -91,7 +91,7 @@ export default function Home() {
             
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              Born from the need to give recognition to hidden gems like <span className="font-semibold text-foreground">Araromi Obo Ekiti</span>, we are building a digital archive that preserves the stories, traditions, and heritage of African communities.
+              Dedicated to giving recognition to local communities like <span className="font-semibold text-foreground">Araromi Obo Ekiti</span>, nestled near the vibrant city of Ado-Ekiti, we are building a digital archive that preserves the unique stories, traditions, and heritage of African towns.
             </p>
             
             {/* CTA Buttons */}

@@ -8,7 +8,7 @@ const About = () => {
     <Layout>
       <SEOHead
         title="About Us - Preserving Heritage & Culture"
-        description="Learn about MyTownpedia - dedicated to giving recognition to towns like Araromi Obo Ekiti and preserving the rich cultural heritage of African communities."
+        description="Learn about MyTownpedia - dedicated to giving recognition to local communities like Araromi Obo Ekiti, near Ado-Ekiti, and preserving the rich cultural heritage of African communities."
       />
 
       <div className="container mx-auto px-4 py-12">
@@ -27,7 +27,7 @@ const About = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  MyTownpedia was born from a simple but powerful realization: many local areas, like Araromi Obo Ekiti, hold immense cultural wealth but lack the recognition they deserve. We are dedicated to preserving, documenting, and sharing the rich stories and traditions of these communities, starting from our roots in Ekiti State and reaching across Africa.
+                  MyTownpedia was born from a simple but powerful realization: many local areas, like Araromi Obo Ekiti, though near vibrant cities like Ado-Ekiti, hold immense cultural wealth but lack the recognition they deserve. We are dedicated to preserving, documenting, and sharing the rich stories and traditions of these communities, starting from our roots in Ekiti State and reaching across Africa.
                 </p>
               </CardContent>
             </Card>
