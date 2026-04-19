@@ -80,18 +80,18 @@ export default function Home() {
             {/* Origin Badge */}
             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/5 border border-primary/10 animate-fade-in">
               <MapPin className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">From Araromi Obo Ekiti to the World</span>
+              <span className="text-sm font-medium text-primary">Proudly Rooted in Araromi Obo Ekiti</span>
             </div>
             
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tight leading-[1.1] animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              Preserving African Heritage,
-              <span className="block mt-2 text-primary">One Town at a Time</span>
+              Giving Voice to Every Town,
+              <span className="block mt-2 text-primary">From Araromi Obo to Ado-Ekiti</span>
             </h1>
             
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              Born in <span className="font-semibold text-foreground">Araromi Obo Ekiti</span>, we are building a digital archive that celebrates and preserves the stories, traditions, and heritage of African communities.
+              Born from the need to give recognition to hidden gems like <span className="font-semibold text-foreground">Araromi Obo Ekiti</span>, we are building a digital archive that preserves the stories, traditions, and heritage of African communities.
             </p>
             
             {/* CTA Buttons */}
