@@ -1,0 +1,602 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   IRRESISTIBLE DESIGN SYSTEM
+   A magnetic, premium experience
+   ============================================ */
+
+@layer base {
+  :root {
+    /* MAGNETIC COLOR PALETTE - Warm, inviting, impossible to ignore */
+    --background: 30 20% 98%;
+    --foreground: 20 25% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 25% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 25% 8%;
+
+    /* Primary - Deep Luxurious Terracotta */
+    --primary: 18 75% 48%;
+    --primary-foreground: 45 50% 98%;
+    --primary-hover: 18 80% 42%;
+
+    /* Secondary - Warm Sand */
+    --secondary: 38 35% 92%;
+    --secondary-foreground: 20 25% 12%;
+
+    /* Muted - Sophisticated Neutrals */
+    --muted: 32 18% 88%;
+    --muted-foreground: 20 12% 45%;
+
+    /* Accent - Electric Gold */
+    --accent: 42 95% 55%;
+    --accent-foreground: 20 30% 8%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders - Whisper soft */
+    --border: 32 25% 90%;
+    --input: 32 25% 88%;
+    --ring: 18 75% 48%;
+
+    --radius: 1rem;
+    
+    /* HERITAGE TOKENS - Rich, cultural, magnetic */
+    --heritage-gold: 45 92% 55%;
+    --heritage-gold-light: 48 85% 68%;
+    --heritage-gold-dark: 42 88% 42%;
+    
+    --heritage-earth: 25 40% 22%;
+    --heritage-earth-light: 28 32% 35%;
+    
+    --heritage-sunset: 16 88% 55%;
+    --heritage-sunset-deep: 8 90% 48%;
+    --heritage-sunset-light: 22 82% 65%;
+    
+    --heritage-forest: 155 50% 32%;
+    --heritage-forest-light: 155 45% 45%;
+    --heritage-forest-bright: 155 55% 55%;
+    
+    --heritage-sky: 200 55% 55%;
+    --heritage-sky-deep: 205 60% 45%;
+    
+    --heritage-amber: 35 90% 58%;
+    --heritage-ruby: 350 78% 52%;
+    --heritage-copper: 25 72% 48%;
+    --heritage-bronze: 30 65% 35%;
+    
+    /* IRRESISTIBLE GRADIENTS */
+    --gradient-hero: linear-gradient(135deg, 
+      hsl(18 75% 48%) 0%, 
+      hsl(35 90% 58%) 50%,
+      hsl(45 92% 55%) 100%);
+    
+    --gradient-hero-alt: linear-gradient(160deg, 
+      hsl(42 88% 42%) 0%, 
+      hsl(16 88% 55%) 45%,
+      hsl(25 72% 48%) 100%);
+    
+    --gradient-premium: linear-gradient(135deg, 
+      hsl(42 88% 42%) 0%, 
+      hsl(45 92% 55%) 30%,
+      hsl(35 90% 58%) 60%, 
+      hsl(16 88% 55%) 100%);
+    
+    --gradient-sunset-glow: linear-gradient(135deg,
+      hsl(16 88% 55% / 0.15) 0%,
+      hsl(45 92% 55% / 0.1) 100%);
+    
+    --gradient-glass: linear-gradient(135deg, 
+      hsl(var(--background) / 0.92) 0%, 
+      hsl(var(--background) / 0.75) 100%);
+    
+    --gradient-glass-gold: linear-gradient(135deg,
+      hsl(var(--heritage-gold) / 0.12) 0%,
+      hsl(var(--heritage-amber) / 0.06) 100%);
+    
+    --gradient-forest: linear-gradient(135deg, 
+      hsl(var(--heritage-forest)) 0%, 
+      hsl(var(--heritage-forest-light)) 50%,
+      hsl(var(--heritage-forest-bright)) 100%);
+    
+    --gradient-shimmer: linear-gradient(90deg, 
+      transparent 0%, 
+      hsl(var(--heritage-gold) / 0.5) 50%, 
+      transparent 100%);
+    
+    /* MAGNETIC SHADOWS */
+    --shadow-soft: 0 2px 12px hsl(var(--heritage-earth) / 0.08);
+    
+    --shadow-warm: 0 8px 32px hsl(var(--heritage-earth) / 0.12), 
+                   0 4px 16px hsl(var(--heritage-earth) / 0.08);
+    
+    --shadow-glow: 0 0 32px hsl(var(--heritage-gold) / 0.4),
+                   0 0 16px hsl(var(--heritage-gold) / 0.25);
+    
+    --shadow-glow-intense: 0 0 60px hsl(var(--heritage-gold) / 0.5),
+                           0 0 30px hsl(var(--heritage-gold) / 0.35),
+                           0 0 15px hsl(var(--heritage-amber) / 0.25);
+    
+    --shadow-intense: 0 32px 80px hsl(var(--heritage-sunset) / 0.4),
+                      0 16px 40px hsl(var(--heritage-sunset) / 0.25);
+    
+    --shadow-elevated: 0 16px 64px -16px hsl(var(--foreground) / 0.2),
+                       0 8px 32px -8px hsl(var(--foreground) / 0.15);
+    
+    --shadow-premium: 0 32px 100px -24px hsl(var(--heritage-gold) / 0.6),
+                      0 16px 50px -12px hsl(var(--heritage-amber) / 0.4);
+    
+    --shadow-magnetic: 0 20px 60px -10px hsl(var(--primary) / 0.35),
+                       0 8px 30px -5px hsl(var(--heritage-gold) / 0.25);
+    
+    /* SMOOTH TRANSITIONS */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-spring: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-elastic: all 0.7s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    
+    /* GLASS EFFECTS */
+    --blur-glass: blur(20px);
+    --backdrop-glass: saturate(180%) blur(24px);
+    --backdrop-glass-heavy: saturate(200%) blur(40px) brightness(1.05);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* DARK MODE: Luxurious Midnight */
+    --background: 18 35% 8%;
+    --foreground: 45 35% 95%;
+
+    --card: 20 32% 12%;
+    --card-foreground: 45 35% 95%;
+
+    --popover: 20 32% 12%;
+    --popover-foreground: 45 35% 95%;
+
+    /* Vibrant primary for dark mode */
+    --primary: 18 90% 62%;
+    --primary-foreground: 45 45% 98%;
+    --primary-hover: 18 92% 55%;
+
+    --secondary: 20 28% 18%;
+    --secondary-foreground: 45 35% 95%;
+
+    --muted: 20 25% 16%;
+    --muted-foreground: 38 22% 60%;
+
+    --accent: 42 95% 65%;
+    --accent-foreground: 18 35% 8%;
+
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 45 35% 95%;
+
+    --border: 20 22% 22%;
+    --input: 20 22% 22%;
+    --ring: 18 90% 62%;
+    
+    /* DARK HERITAGE TOKENS */
+    --heritage-gold: 45 90% 65%;
+    --heritage-gold-light: 48 85% 75%;
+    --heritage-gold-dark: 42 88% 52%;
+    
+    --heritage-earth: 28 45% 45%;
+    --heritage-earth-light: 28 40% 55%;
+    
+    --heritage-sunset: 18 90% 65%;
+    --heritage-sunset-deep: 10 92% 58%;
+    --heritage-sunset-light: 22 85% 72%;
+    
+    --heritage-forest: 152 42% 42%;
+    --heritage-forest-light: 152 40% 52%;
+    --heritage-forest-bright: 152 50% 62%;
+    
+    --heritage-sky: 200 40% 38%;
+    --heritage-sky-deep: 202 48% 48%;
+    
+    --heritage-amber: 38 92% 68%;
+    --heritage-ruby: 352 80% 62%;
+    --heritage-copper: 25 75% 55%;
+    --heritage-bronze: 30 68% 48%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  
+  h1 {
+    @apply text-5xl md:text-6xl lg:text-8xl;
+    line-height: 1.05;
+  }
+  
+  h2 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+    line-height: 1.1;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+    line-height: 1.2;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  section[id] {
+    scroll-margin-top: 100px;
+  }
+
+  a[href^="#"] {
+    scroll-behavior: smooth;
+  }
+  
+  ::selection {
+    background: hsl(var(--heritage-gold) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  /* GLASSMORPHISM - Ultra premium */
+  .glass {
+    background: hsl(var(--background) / 0.88);
+    backdrop-filter: var(--backdrop-glass);
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: var(--shadow-warm);
+  }
+  
+  .glass-card {
+    background: hsl(var(--card) / 0.65);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid hsl(var(--border) / 0.35);
+    box-shadow: var(--shadow-elevated);
+  }
+  
+  .glass-gold {
+    background: var(--gradient-glass-gold);
+    backdrop-filter: var(--backdrop-glass-heavy);
+    border: 1px solid hsl(var(--heritage-gold) / 0.25);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* GRADIENT TEXT - Magnetic pull */
+  .text-gradient-premium {
+    background: var(--gradient-premium);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 16px hsl(var(--heritage-gold) / 0.35));
+  }
+  
+  .text-gradient-hero {
+    background: var(--gradient-hero-alt);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 20px hsl(var(--heritage-sunset) / 0.45));
+  }
+  
+  .text-gradient-forest {
+    background: var(--gradient-forest);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* SHIMMER - Irresistible motion */
+  @keyframes shimmer-flow {
+    0% {
+      background-position: 200% center;
+    }
+    100% {
+      background-position: -200% center;
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--heritage-gold)) 0%,
+      hsl(var(--heritage-amber)) 20%,
+      hsl(var(--heritage-gold-light)) 40%,
+      hsl(var(--heritage-gold)) 60%,
+      hsl(var(--heritage-amber)) 80%,
+      hsl(var(--heritage-gold)) 100%
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-flow 4s linear infinite;
+  }
+  
+  /* MAGNETIC HOVER EFFECTS */
+  .hover-lift {
+    @apply transition-all duration-500;
+    transform: translateY(0) scale(1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-magnetic);
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-500;
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow-intense);
+    transform: scale(1.03);
+  }
+  
+  .hover-float {
+    animation: gentle-float 5s ease-in-out infinite;
+  }
+  
+  @keyframes gentle-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(0.5deg); }
+    75% { transform: translateY(-4px) rotate(-0.5deg); }
+  }
+  
+  /* PULSE GLOW - Attention grabber */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--heritage-gold) / 0.4),
+                  0 0 40px hsl(var(--heritage-gold) / 0.2);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--heritage-gold) / 0.6),
+                  0 0 80px hsl(var(--heritage-gold) / 0.3);
+    }
+  }
+  
+  .pulse-glow {
+    animation: pulse-glow 2.5s ease-in-out infinite;
+  }
+  
+  /* MAGNETIC BUTTON */
+  .btn-magnetic {
+    @apply relative overflow-hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-magnetic::before {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: linear-gradient(135deg, 
+      hsl(var(--heritage-gold) / 0.3) 0%,
+      transparent 60%);
+    transition: opacity 0.4s;
+  }
+  
+  .btn-magnetic:hover::before {
+    @apply opacity-100;
+  }
+  
+  .btn-magnetic:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-magnetic);
+  }
+  
+  /* MESH BACKGROUNDS - Depth & dimension */
+  .mesh-warm {
+    background: 
+      radial-gradient(ellipse at 10% 20%, hsl(var(--heritage-gold) / 0.25) 0px, transparent 50%),
+      radial-gradient(ellipse at 90% 10%, hsl(var(--heritage-sunset) / 0.2) 0px, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, hsl(var(--heritage-copper) / 0.15) 0px, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, hsl(var(--heritage-amber) / 0.2) 0px, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, hsl(var(--heritage-gold) / 0.18) 0px, transparent 45%);
+  }
+  
+  .mesh-hero {
+    background: 
+      radial-gradient(ellipse 120% 80% at 50% 120%, hsl(var(--heritage-sunset) / 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 0%, hsl(var(--heritage-gold) / 0.3) 0%, transparent 40%),
+      radial-gradient(ellipse at 80% 20%, hsl(var(--heritage-amber) / 0.25) 0%, transparent 45%);
+  }
+  
+  /* TEXTURE GRAIN - Organic feel */
+  .texture-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+
+  /* GRADIENT BACKGROUNDS */
+  .bg-gradient-subtle {
+    background: linear-gradient(180deg, 
+      hsl(var(--background)) 0%, 
+      hsl(var(--muted) / 0.4) 50%, 
+      hsl(var(--background)) 100%
+    );
+  }
+  
+  .bg-gradient-warm {
+    background: linear-gradient(135deg,
+      hsl(var(--background)) 0%,
+      hsl(18 45% 96%) 50%,
+      hsl(45 50% 95%) 100%
+    );
+  }
+  
+  /* PREMIUM BORDERS */
+  .border-gradient-gold {
+    border: 2px solid transparent;
+    background-image: 
+      linear-gradient(hsl(var(--background)), hsl(var(--background))),
+      var(--gradient-premium);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+  
+  /* SCROLL REVEAL - Cinematic entrance */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  
+  /* AMBIENT GLOW */
+  .ambient-glow-gold {
+    position: relative;
+  }
+  
+  .ambient-glow-gold::before {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    background: radial-gradient(circle at center, 
+      hsl(var(--heritage-gold) / 0.25) 0%,
+      transparent 65%);
+    z-index: -1;
+    filter: blur(50px);
+    animation: ambient-pulse 4s ease-in-out infinite;
+  }
+  
+  @keyframes ambient-pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+  
+  /* CARD SHINE EFFECT */
+  .card-shine {
+    @apply relative overflow-hidden;
+  }
+  
+  .card-shine::after {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      hsl(var(--heritage-gold) / 0.15) 45%,
+      hsl(var(--heritage-gold) / 0.25) 50%,
+      hsl(var(--heritage-gold) / 0.15) 55%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    transition: opacity 0.3s;
+  }
+  
+  .card-shine:hover::after {
+    @apply opacity-100;
+    animation: card-shine-sweep 0.8s ease-out;
+  }
+  
+  @keyframes card-shine-sweep {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+  
+  /* UNDERLINE ANIMATION */
+  .link-underline {
+    @apply relative;
+  }
+  
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 origin-left;
+    background: var(--gradient-premium);
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
+  
+  /* STAGGER ANIMATIONS */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  
+  /* HERO GRADIENT OVERLAY */
+  .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--background) / 0.3) 0%,
+      hsl(var(--background) / 0.5) 30%,
+      hsl(var(--background) / 0.85) 70%,
+      hsl(var(--background)) 100%
+    );
+  }
+  
+  /* FEATURED BADGE */
+  .badge-featured {
+    @apply relative overflow-hidden;
+    background: var(--gradient-premium);
+    animation: badge-shimmer 3s linear infinite;
+    background-size: 200% 100%;
+  }
+  
+  @keyframes badge-shimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+  
+  /* RIPPLE EFFECT */
+  .ripple {
+    @apply relative overflow-hidden;
+  }
+  
+  .ripple::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 pointer-events-none;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
+      hsl(var(--heritage-gold) / 0.3) 0%,
+      transparent 60%);
+    transition: opacity 0.3s;
+  }
+  
+  .ripple:hover::before {
+    @apply opacity-100;
+  }
+}
