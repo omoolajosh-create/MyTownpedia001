@@ -173,6 +173,72 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Local News & Community Updates */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <ScrollReveal>
+            <div className="max-w-5xl mx-auto text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-serif font-bold leading-tight mb-4">
+                Local News & Community Updates
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Stay informed about the latest developments, events, and initiatives shaping our communities, from Ado-Ekiti to Araromi Obo.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* News Item 1: Ekiti State Budget */}
+              <Card className="overflow-hidden shadow-lg">
+                <CardContent className="p-6 space-y-4">
+                  <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20">Ekiti State</Badge>
+                  <h3 className="text-xl font-semibold leading-snug">
+                    Ekiti State Approves 2026 Budget of Sustainable Governance
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    The Ekiti State Executive Council, in its April 2026 meeting, approved a strategic budget focusing on completing ongoing projects, ensuring food security, and driving inclusive development across the state.
+                  </p>
+                  <a href="https://www.ekitistate.gov.ng/news" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm font-medium flex items-center">
+                    Read More <ArrowRight className="ml-1 h-4 w-4" />
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* News Item 2: Ado-Ekiti Community Development */}
+              <Card className="overflow-hidden shadow-lg">
+                <CardContent className="p-6 space-y-4">
+                  <Badge variant="secondary" className="bg-green-500/10 text-green-500 hover:bg-green-500/20">Ado-Ekiti</Badge>
+                  <h3 className="text-xl font-semibold leading-snug">
+                    Community Development Initiatives Gain Momentum in Ado-Ekiti
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    Recent efforts in Ado-Ekiti are boosting rural infrastructure and expanding agricultural programs, reflecting the government's commitment to continuous development and improving livelihoods.
+                  </p>
+                  <a href="https://www.ekitistate.gov.ng/news" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm font-medium flex items-center">
+                    Read More <ArrowRight className="ml-1 h-4 w-4" />
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* News Item 3: Araromi Obo Spotlight / Upcoming Events */}
+              <Card className="overflow-hidden shadow-lg">
+                <CardContent className="p-6 space-y-4">
+                  <Badge variant="secondary" className="bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500/20">Araromi Obo</Badge>
+                  <h3 className="text-xl font-semibold leading-snug">
+                    Araromi Obo Ekiti: Upcoming Heritage Festival & Community Plans
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    Exciting plans are underway for Araromi Obo Ekiti, including a forthcoming heritage festival to celebrate local traditions and new community development initiatives. Stay tuned for details!
+                  </p>
+                  <Link to="/events" className="text-primary hover:underline text-sm font-medium flex items-center">
+                    View Events <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* Time Capsule Feature */}
       <section className="py-20">
         <div className="container mx-auto px-4">
