@@ -79,10 +79,10 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center space-y-8">
             {/* MyTownpedia Title */}
             <div className="animate-fade-in">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight text-primary drop-shadow-lg" style={{ animationDelay: '0.1s' }}>
+              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold tracking-tight text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]" style={{ animationDelay: '0.1s' }}>
                 MyTownpedia
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mt-4 drop-shadow-md">Discover African Town Stories</p>
+              <p className="text-xl md:text-2xl text-white/90 mt-4 font-medium drop-shadow-lg">Discover African Town Stories</p>
             </div>
             
             {/* Origin Badge */}
@@ -92,8 +92,8 @@ export default function Home() {
             </div>
             
             {/* Subtitle */}
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed backdrop-blur-sm bg-background/30 p-4 rounded-lg animate-fade-in" style={{ animationDelay: '0.3s' }}>
-              Dedicated to giving recognition to local communities like <span className="font-semibold text-foreground">Araromi Obo Ekiti</span>, nestled near the vibrant city of Ado-Ekiti, we are building a digital archive that preserves the unique stories, traditions, and heritage of African towns.
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed backdrop-blur-md bg-black/40 p-6 rounded-2xl border border-white/10 animate-fade-in shadow-2xl" style={{ animationDelay: '0.3s' }}>
+              Dedicated to giving recognition to local communities like <span className="font-semibold text-white">Araromi Obo Ekiti</span>, nestled near the vibrant city of Ado-Ekiti, we are building a digital archive that preserves the unique stories, traditions, and heritage of African towns.
             </p>
             
             {/* CTA Buttons */}
