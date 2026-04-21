@@ -11,8 +11,8 @@ export const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="h-10 w-10 rounded-xl bg-gradient-hero flex items-center justify-center">
-                <Globe className="h-6 w-6 text-white" />
+              <div className="h-10 w-10 overflow-hidden">
+                <img src="/tribal-m-logo.png" alt="MyTownpedia Logo" className="h-full w-full object-contain" />
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-serif font-bold text-foreground">MyTownpedia</span>
