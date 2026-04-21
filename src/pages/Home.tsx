@@ -9,6 +9,7 @@ import { Layout } from '@/components/layout/Layout'
 import { SEOHead } from '@/components/common/SEOHead'
 import { ScrollReveal } from '@/components/common/ScrollReveal'
 import { StatsCounter } from '@/components/home/StatsCounter'
+import { RotatingEarth } from '@/components/home/RotatingEarth'
 import { useStats } from '@/hooks/useStats'
 
 export default function Home() {
@@ -66,36 +67,37 @@ export default function Home() {
         type="website"
       />
 
-      {/* Hero Section - Professional & Clean */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background with subtle gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/20 to-background" />
+      {/* Hero Section - 3D Rotating Earth */}
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-background via-muted/10 to-background">
+        {/* 3D Earth Background */}
+        <div className="absolute inset-0 z-0">
+          <RotatingEarth />
+        </div>
         
-        {/* Subtle accent orb */}
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-heritage-gold/5 rounded-full blur-[100px]" />
-        
-        <div className="container relative z-10 mx-auto px-4 py-20 md:py-32">
+        {/* Content Overlay */}
+        <div className="container relative z-10 mx-auto px-4 py-20 md:py-32 flex flex-col items-center justify-center">
           <div className="max-w-4xl mx-auto text-center space-y-8">
+            {/* MyTownpedia Title */}
+            <div className="animate-fade-in">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight text-primary drop-shadow-lg" style={{ animationDelay: '0.1s' }}>
+                MyTownpedia
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground mt-4 drop-shadow-md">Discover African Town Stories</p>
+            </div>
+            
             {/* Origin Badge */}
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/5 border border-primary/10 animate-fade-in">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.2s' }}>
               <MapPin className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium text-primary">Proudly Rooted in Araromi Obo Ekiti</span>
             </div>
             
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tight leading-[1.1] animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              Giving Voice to Every Town,
-              <span className="block mt-2 text-primary">From Araromi Obo to Ado-Ekiti</span>
-            </h1>
-            
             {/* Subtitle */}
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed backdrop-blur-sm bg-background/30 p-4 rounded-lg animate-fade-in" style={{ animationDelay: '0.3s' }}>
               Dedicated to giving recognition to local communities like <span className="font-semibold text-foreground">Araromi Obo Ekiti</span>, nestled near the vibrant city of Ado-Ekiti, we are building a digital archive that preserves the unique stories, traditions, and heritage of African towns.
             </p>
             
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
               <Button asChild size="lg" className="text-base group shadow-lg hover:shadow-xl transition-shadow">
                 <Link to="/towns">
                   Explore Towns
@@ -116,7 +118,7 @@ export default function Home() {
         </div>
         
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-50 z-20">
           <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center pt-2">
             <div className="w-1 h-2 bg-muted-foreground/50 rounded-full" />
           </div>
