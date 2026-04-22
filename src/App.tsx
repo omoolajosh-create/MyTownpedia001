@@ -55,6 +55,10 @@ import CreateTimeCapsule from "./pages/TimeCapsule/CreateTimeCapsule";
 import TimeCapsuleDetail from "./pages/TimeCapsule/TimeCapsuleDetail";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import NewsList from "./pages/News/NewsList";
+import NewsDetail from "./pages/News/NewsDetail";
+import AdminNewsForm from "./pages/Admin/AdminNewsForm";
+import AdminNewsManagement from "./pages/Admin/AdminNewsManagement";
 
 const queryClient = new QueryClient();
 
@@ -160,6 +164,11 @@ const App = () => (
             <Route path="/time-capsule/:id" element={<TimeCapsuleDetail />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/news" element={<NewsList />} />
+            <Route path="/news/:id" element={<NewsDetail />} />
+            <Route path="/admin/news" element={<ProtectedRoute requireAdmin><AdminNewsManagement /></ProtectedRoute>} />
+            <Route path="/admin/news/create" element={<ProtectedRoute requireAdmin><AdminNewsForm /></ProtectedRoute>} />
+            <Route path="/admin/news/:id/edit" element={<ProtectedRoute requireAdmin><AdminNewsForm /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -10,7 +10,8 @@ import {
   TrendingUp,
   AlertCircle,
   CheckCircle,
-  Globe
+  Globe,
+  Newspaper
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -49,6 +50,7 @@ export default function AdminDashboard() {
     diasporaPosts: 0,
     donations: 0,
     campaigns: 0,
+    news: 0,
   })
 
   useEffect(() => {
@@ -376,6 +378,10 @@ export default function AdminDashboard() {
               <Button variant="outline" className="justify-start" onClick={() => navigate('/admin/quizzes/create')}>
                 <BookOpen className="mr-2 h-4 w-4" />
                 Create Quiz
+              </Button>
+              <Button variant="outline" className="justify-start" onClick={() => navigate('/admin/news')}>
+                <Newspaper className="mr-2 h-4 w-4" />
+                Manage News
               </Button>
               <Button variant="outline" className="justify-start" onClick={() => navigate('/admin')}>
                 <TrendingUp className="mr-2 h-4 w-4" />

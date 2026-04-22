@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, User, LogOut, Shield, BookOpen, MapPin, Calendar, DollarSign, Heart, Globe, Clock } from 'lucide-react'
+import { Menu, X, User, LogOut, Shield, BookOpen, MapPin, Calendar, DollarSign, Heart, Globe, Clock, Newspaper } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/integrations/supabase/client'
@@ -22,6 +22,7 @@ export const Header = () => {
   const navItems = [
     { label: 'Towns', href: '/towns', icon: MapPin },
     { label: 'Stories', href: '/stories', icon: BookOpen },
+    { label: 'News', href: '/news', icon: Newspaper },
     { label: 'Time Capsule', href: '/time-capsule', icon: Clock },
     { label: 'Heritage', href: '/heritage/timeline', icon: Heart },
     { label: 'Events', href: '/events', icon: Calendar },
