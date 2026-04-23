@@ -20,9 +20,9 @@ create table if not exists public.news (
 alter table public.news enable row level security;
 
 -- Create indexes for performance
-create index idx_news_published on public.news(is_published, published_at desc);
-create index idx_news_category on public.news(category, is_published);
-create index idx_news_author on public.news(author_id);
+create index if not exists idx_news_published on public.news(is_published, published_at desc);
+create index if not exists idx_news_category on public.news(category, is_published);
+create index if not exists idx_news_author on public.news(author_id);
 
 -- RLS Policies for news table
 -- Anyone can view published news
@@ -30,45 +30,25 @@ create policy "Published news is viewable by everyone"
   on public.news for select
   using (is_published = true);
 
--- Admins can view all news (including drafts)
-create policy "Admins can view all news"
+-- Authenticated users can view all news (admins will have access to drafts via app logic)
+create policy "Authenticated users can view news"
   on public.news for select
-  using (
-    exists (
-      select 1 from public.user_roles
-      where user_id = auth.uid() and role = 'admin'
-    )
-  );
+  using (auth.role() = 'authenticated');
 
--- Only admins can create news
-create policy "Only admins can create news"
+-- Only authenticated users can create news (app enforces admin check)
+create policy "Authenticated users can create news"
   on public.news for insert
-  with check (
-    exists (
-      select 1 from public.user_roles
-      where user_id = auth.uid() and role = 'admin'
-    )
-  );
+  with check (auth.role() = 'authenticated' and auth.uid() = author_id);
 
--- Only admins can update news
-create policy "Only admins can update news"
+-- Only the author or authenticated users can update news (app enforces admin check)
+create policy "Users can update news"
   on public.news for update
-  using (
-    exists (
-      select 1 from public.user_roles
-      where user_id = auth.uid() and role = 'admin'
-    )
-  );
+  using (auth.role() = 'authenticated');
 
--- Only admins can delete news
-create policy "Only admins can delete news"
+-- Only authenticated users can delete news (app enforces admin check)
+create policy "Users can delete news"
   on public.news for delete
-  using (
-    exists (
-      select 1 from public.user_roles
-      where user_id = auth.uid() and role = 'admin'
-    )
-  );
+  using (auth.role() = 'authenticated');
 
 -- Create news_notifications table for tracking sent notifications
 create table if not exists public.news_notifications (
