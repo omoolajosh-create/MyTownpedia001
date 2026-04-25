@@ -199,9 +199,9 @@ export default function Home() {
                   <p className="text-muted-foreground text-sm">
                     The Ekiti State Executive Council, in its April 2026 meeting, approved a strategic budget focusing on completing ongoing projects, ensuring food security, and driving inclusive development across the state.
                   </p>
-                  <a href="https://www.ekitistate.gov.ng/news" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm font-medium flex items-center">
+                  <Link to="/news" className="text-primary hover:underline text-sm font-medium flex items-center">
                     Read More <ArrowRight className="ml-1 h-4 w-4" />
-                  </a>
+                  </Link>
                 </CardContent>
               </Card>
 
@@ -215,9 +215,9 @@ export default function Home() {
                   <p className="text-muted-foreground text-sm">
                     Recent efforts in Ado-Ekiti are boosting rural infrastructure and expanding agricultural programs, reflecting the government's commitment to continuous development and improving livelihoods.
                   </p>
-                  <a href="https://www.ekitistate.gov.ng/news" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm font-medium flex items-center">
+                  <Link to="/news" className="text-primary hover:underline text-sm font-medium flex items-center">
                     Read More <ArrowRight className="ml-1 h-4 w-4" />
-                  </a>
+                  </Link>
                 </CardContent>
               </Card>
 

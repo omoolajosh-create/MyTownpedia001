@@ -61,7 +61,30 @@ export const Footer = () => {
                 { label: 'Home', href: '/' },
                 { label: 'Towns', href: '/towns' },
                 { label: 'Stories', href: '/stories' },
+                { label: 'News', href: '/news' },
                 { label: 'Heritage Timeline', href: '/heritage/timeline' },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* News & Updates */}
+          <div>
+            <h3 className="font-serif font-semibold text-foreground mb-4">News</h3>
+            <ul className="space-y-3">
+              {[
+                { label: 'Latest News', href: '/news' },
+                { label: 'Community Updates', href: '/news?category=Community' },
+                { label: 'Heritage Stories', href: '/news?category=Heritage' },
+                { label: 'Events & Opportunities', href: '/news?category=Opportunities' },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
