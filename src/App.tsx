@@ -59,6 +59,7 @@ import NewsList from "./pages/News/NewsList";
 import NewsDetail from "./pages/News/NewsDetail";
 import AdminNewsForm from "./pages/Admin/AdminNewsForm";
 import AdminNewsManagement from "./pages/Admin/AdminNewsManagement";
+import ContentApprovalDashboard from "./pages/Admin/ContentApprovalDashboard";
 
 const queryClient = new QueryClient();
 
@@ -169,6 +170,7 @@ const App = () => (
             <Route path="/admin/news" element={<ProtectedRoute requireAdmin><AdminNewsManagement /></ProtectedRoute>} />
             <Route path="/admin/news/create" element={<ProtectedRoute requireAdmin><AdminNewsForm /></ProtectedRoute>} />
             <Route path="/admin/news/:id/edit" element={<ProtectedRoute requireAdmin><AdminNewsForm /></ProtectedRoute>} />
+            <Route path="/admin/content-approval" element={<ProtectedRoute requireAdmin><ContentApprovalDashboard /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

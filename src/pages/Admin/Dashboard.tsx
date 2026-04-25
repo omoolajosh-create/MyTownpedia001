@@ -11,7 +11,8 @@ import {
   AlertCircle,
   CheckCircle,
   Globe,
-  Newspaper
+  Newspaper,
+  CheckSquare
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -382,6 +383,10 @@ export default function AdminDashboard() {
               <Button variant="outline" className="justify-start" onClick={() => navigate('/admin/news')}>
                 <Newspaper className="mr-2 h-4 w-4" />
                 Manage News
+              </Button>
+              <Button variant="outline" className="justify-start" onClick={() => navigate('/admin/content-approval')}>
+                <CheckSquare className="mr-2 h-4 w-4" />
+                Approve Content
               </Button>
               <Button variant="outline" className="justify-start" onClick={() => navigate('/admin')}>
                 <TrendingUp className="mr-2 h-4 w-4" />
