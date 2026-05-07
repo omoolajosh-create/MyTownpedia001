@@ -27,3 +27,4 @@ This project is actively being developed and improved.
 ---
 
 **MyTownpedia — Preserving Our Roots, Sharing Our Stories.**
+# News Module Deployment
