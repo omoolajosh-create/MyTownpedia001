@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { User } from '@supabase/supabase-js'
 import { supabase, Profile } from '@/lib/supabase'
 
@@ -7,66 +7,76 @@ export const useAuth = () => {
   const [profile, setProfile] = useState<Profile | null>(null)
   const [isAdmin, setIsAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    // Listen for auth changes FIRST
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-      if (session?.user) {
-        // Defer Supabase calls to avoid deadlocks
-        setTimeout(() => {
-          fetchProfile(session.user!.id)
-        }, 0)
-      } else {
-        setProfile(null)
-        setLoading(false)
-      }
-    })
-
-    // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-      if (session?.user) {
-        fetchProfile(session.user.id)
-      } else {
-        setLoading(false)
-      }
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
+  const requestId = useRef(0)
 
   const fetchProfile = async (userId: string) => {
+    const currentRequest = ++requestId.current
+    setLoading(true)
     try {
-      // Fetch profile data
       const { data: profileData, error: profileError } = await supabase
         .from('profiles')
-        .select('id, full_name, avatar_url, email, created_at, updated_at')
+        .select('id, full_name, avatar_url, email, role, created_at, updated_at')
         .eq('id', userId)
         .maybeSingle()
 
       if (profileError) throw profileError
-      setProfile(profileData)
 
-      // Fetch user roles securely using the has_role function
+      const profileIsAdmin = profileData?.role === 'admin'
       const { data: adminCheck, error: roleError } = await supabase
         .rpc('has_role', { _user_id: userId, _role: 'admin' })
 
-      if (!roleError) {
-        setIsAdmin(adminCheck === true)
-      }
+      if (currentRequest !== requestId.current) return
+      setProfile(profileData)
+      setIsAdmin(profileIsAdmin || (!roleError && adminCheck === true))
     } catch (error) {
+      if (currentRequest !== requestId.current) return
       console.error('Error fetching profile:', error)
+      setProfile(null)
+      setIsAdmin(false)
     } finally {
-      setLoading(false)
+      if (currentRequest === requestId.current) setLoading(false)
     }
   }
 
-  const signIn = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+  useEffect(() => {
+    let mounted = true
+
+    const initialize = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!mounted) return
+      setUser(session?.user ?? null)
+      if (session?.user) {
+        await fetchProfile(session.user.id)
+      } else {
+        setProfile(null)
+        setIsAdmin(false)
+        setLoading(false)
+      }
+    }
+
+    initialize()
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!mounted) return
+      setUser(session?.user ?? null)
+      if (session?.user && event !== 'INITIAL_SESSION') {
+        fetchProfile(session.user.id)
+      } else if (!session?.user) {
+        requestId.current += 1
+        setProfile(null)
+        setIsAdmin(false)
+        setLoading(false)
+      }
     })
+
+    return () => {
+      mounted = false
+      subscription.unsubscribe()
+    }
+  }, [])
+
+  const signIn = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     return { data, error }
   }
 
@@ -75,12 +85,7 @@ export const useAuth = () => {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        emailRedirectTo: redirectUrl,
-        data: {
-          full_name: fullName,
-        },
-      },
+      options: { emailRedirectTo: redirectUrl, data: { full_name: fullName } },
     })
     return { data, error }
   }
@@ -92,18 +97,13 @@ export const useAuth = () => {
 
   const updateProfile = async (updates: Partial<Profile>) => {
     if (!user) return { error: new Error('No user logged in') }
-
     const { data, error } = await supabase
       .from('profiles')
       .update(updates)
       .eq('id', user.id)
       .select()
       .single()
-
-    if (!error && data) {
-      setProfile(data)
-    }
-
+    if (!error && data) setProfile(data)
     return { data, error }
   }
 
