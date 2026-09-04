@@ -43,7 +43,7 @@ interface PendingContent {
 
 export default function ContentApprovalDashboard() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const { toast } = useToast();
 
   const [pendingContent, setPendingContent] = useState<PendingContent[]>([]);
@@ -54,8 +54,10 @@ export default function ContentApprovalDashboard() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
-    if (!user || user.role !== 'admin') {
-      navigate('/');
+    if (authLoading) return;
+
+    if (!user || !isAdmin) {
+      navigate('/', { replace: true });
       return;
     }
 
@@ -63,7 +65,7 @@ export default function ContentApprovalDashboard() {
     const interval = setInterval(fetchPendingContent, 30000); // Refresh every 30 seconds
 
     return () => clearInterval(interval);
-  }, [user, navigate]);
+  }, [user, isAdmin, authLoading, navigate]);
 
   const fetchPendingContent = async () => {
     try {
