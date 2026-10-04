@@ -1,43 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Calendar, Eye, Search, Plus, Loader2 } from 'lucide-react';
+import { Calendar, Eye, Search, Plus, Loader2, ArrowUpRight, MapPin } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { Helmet } from 'react-helmet-async';
 
-const NEWS_CATEGORIES = [
-  'Community',
-  'Heritage',
-  'Events',
-  'Culture',
-  'History',
-  'Traditions',
-  'Development',
-  'Other',
-];
-
-interface NewsArticle {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  cover_image_url: string | null;
-  category: string;
-  tags: string[];
-  published_at: string;
-  view_count: number;
-}
+const NEWS_CATEGORIES = ['Community', 'Education', 'Opportunities', 'Development', 'Heritage', 'Events', 'Culture', 'Other'];
+interface NewsArticle { id: string; title: string; excerpt: string; content: string; cover_image_url: string | null; category: string; tags: string[]; published_at: string; view_count: number; }
 
 export default function NewsList() {
   const { user } = useAuth();
@@ -45,184 +15,27 @@ export default function NewsList() {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-
-  useEffect(() => {
-    fetchNews();
-  }, [selectedCategory]);
-
-  const fetchNews = async () => {
-    try {
-      setLoading(true);
-      let query = supabase
-        .from('news')
-        .select('*')
-        .eq('is_published', true)
-        .order('published_at', { ascending: false });
-
-      if (selectedCategory) {
-        query = query.eq('category', selectedCategory);
-      }
-
-      const { data, error } = await query;
-
-      if (error) throw error;
-
-      setArticles(
-        (data || []).map((article: any) => ({
-          ...article,
-          tags: Array.isArray(article.tags) ? article.tags : [],
-        }))
-      );
-    } catch (error) {
-      console.error('Error fetching news:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const filteredArticles = articles.filter((article) => {
-    const matchesSearch =
-      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      article.excerpt?.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSearch;
-  });
-
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
-
-  return (
-    <>
-      <Helmet>
-        <title>News - MyTownpedia</title>
-        <meta
-          name="description"
-          content="Stay connected with the latest news and updates from our community"
-        />
-      </Helmet>
-
-      <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
-        {/* Hero Section */}
-        <section className="py-20 px-4 text-center">
-          <div className="max-w-4xl mx-auto space-y-6">
-            <h1 className="text-5xl font-serif font-bold text-foreground">
-              Community News
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              Stay connected with the latest stories and updates from our community
-            </p>
-            {user?.role === 'admin' && (
-              <Button asChild className="mt-4">
-                <Link to="/admin/news/create">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Create News Article
-                </Link>
-              </Button>
-            )}
-          </div>
-        </section>
-
-        {/* Filters and Search */}
-        <section className="py-8 px-4 bg-background/50 backdrop-blur-sm sticky top-0 z-20 border-b">
-          <div className="max-w-6xl mx-auto space-y-4">
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search news articles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-              <Select value={selectedCategory || 'all'} onValueChange={(val) => setSelectedCategory(val === 'all' ? '' : val)}>
-                <SelectTrigger className="w-full md:w-48">
-                  <SelectValue placeholder="All Categories" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  {NEWS_CATEGORIES.map((cat) => (
-                    <SelectItem key={cat} value={cat}>
-                      {cat}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </section>
-
-        {/* News Grid */}
-        <section className="py-16 px-4">
-          <div className="max-w-6xl mx-auto">
-            {loading ? (
-              <div className="flex justify-center items-center py-20">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              </div>
-            ) : filteredArticles.length === 0 ? (
-              <Card className="text-center py-16">
-                <CardContent>
-                  <Search className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold mb-4">No News Found</h3>
-                  <p className="text-muted-foreground mb-8">
-                    {searchQuery
-                      ? 'Try adjusting your search terms'
-                      : 'No articles published yet'}
-                  </p>
-                </CardContent>
-              </Card>
-            ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredArticles.map((article) => (
-                  <Link key={article.id} to={`/news/${article.id}`}>
-                    <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full cursor-pointer">
-                      {article.cover_image_url && (
-                        <div className="aspect-video overflow-hidden bg-muted">
-                          <img
-                            src={article.cover_image_url}
-                            alt={article.title}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                      )}
-                      <CardContent className="p-6 space-y-3">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <Badge variant="secondary">{article.category}</Badge>
-                          {article.tags.slice(0, 2).map((tag: string) => (
-                            <Badge key={tag} variant="outline" className="text-xs">
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                        <h3 className="text-lg font-serif font-bold line-clamp-2 group-hover:text-primary transition-colors">
-                          {article.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground line-clamp-2">
-                          {article.excerpt || article.content.substring(0, 120)}...
-                        </p>
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground pt-2 border-t">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-3.5 w-3.5" />
-                            {formatDate(article.published_at)}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Eye className="h-3.5 w-3.5" />
-                            {article.view_count}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
+  useEffect(() => { fetchNews(); }, [selectedCategory]);
+  const fetchNews = async () => { try { setLoading(true); let query = supabase.from('news').select('*').eq('is_published', true).order('published_at', { ascending: false }); if (selectedCategory) query = query.eq('category', selectedCategory); const { data, error } = await query; if (error) throw error; setArticles((data || []).map((article: any) => ({ ...article, tags: Array.isArray(article.tags) ? article.tags : [] }))); } catch (error) { console.error('Error fetching news:', error); } finally { setLoading(false); } };
+  const filteredArticles = articles.filter((article) => { const needle = searchQuery.toLowerCase(); return article.title.toLowerCase().includes(needle) || article.excerpt?.toLowerCase().includes(needle) || article.content?.toLowerCase().includes(needle); });
+  const formatDate = (date: string) => new Date(date).toLocaleDateString('en-NG', { day: '2-digit', month: 'short', year: 'numeric' });
+  const lead = filteredArticles[0]; const latest = filteredArticles.slice(1);
+  return <>
+    <Helmet><title>Newsroom | MyTownpedia</title><meta name="description" content="Trusted community intelligence and opportunities from Ekiti State." /></Helmet>
+    <main className="min-h-screen bg-[#f7f3ec] text-[#1e2926]">
+      <header className="border-b border-[#1e2926]/20 bg-[#f7f3ec]"><div className="mx-auto max-w-7xl px-5 py-4 md:px-10">
+        <div className="flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#68736d]"><span>Ekiti State · Community Intelligence</span><span className="hidden sm:block">Independent · Useful · Local</span></div>
+        <div className="mt-5 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="mb-1 font-serif text-sm italic text-[#b36b3b]">The local record</p><h1 className="font-serif text-5xl font-bold tracking-[-0.04em] md:text-7xl">The Newsroom</h1></div><p className="max-w-sm border-l-2 border-[#b36b3b] pl-4 font-serif text-base leading-relaxed text-[#68736d]">The stories, opportunities and public information that matter to people across Ekiti.</p></div>
+        <nav className="mt-7 flex gap-5 overflow-x-auto border-t border-[#1e2926]/15 pt-3 text-xs font-bold uppercase tracking-[0.16em] whitespace-nowrap"><button onClick={() => setSelectedCategory('')} className={selectedCategory === '' ? 'text-[#b36b3b]' : 'text-[#68736d] hover:text-[#1e2926]'}>All stories</button>{NEWS_CATEGORIES.map((category) => <button key={category} onClick={() => setSelectedCategory(category)} className={selectedCategory === category ? 'text-[#b36b3b]' : 'text-[#68736d] hover:text-[#1e2926]'}>{category}</button>)}</nav>
+      </div></header>
+      <div className="mx-auto max-w-7xl px-5 py-8 md:px-10 md:py-12">
+        <div className="mb-8 flex flex-col justify-between gap-4 border-b border-[#1e2926]/20 pb-5 sm:flex-row sm:items-center"><div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#68736d]"><MapPin className="h-4 w-4 text-[#b36b3b]" /> Reporting from Ekiti</div><div className="relative w-full sm:w-72"><Search className="absolute left-3 top-3 h-4 w-4 text-[#68736d]" /><Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search the newsroom" className="h-10 rounded-none border-[#1e2926]/25 bg-transparent pl-10 font-serif text-sm focus-visible:ring-[#b36b3b]" /></div></div>
+        {user?.role === 'admin' && <Link to="/admin/news/create" className="mb-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[#b36b3b] hover:underline"><Plus className="h-4 w-4" /> Create article</Link>}
+        {loading ? <div className="flex justify-center py-24"><Loader2 className="h-8 w-8 animate-spin text-[#b36b3b]" /></div> : filteredArticles.length === 0 ? <div className="border-y border-[#1e2926]/20 py-20 text-center"><Search className="mx-auto mb-4 h-10 w-10 text-[#68736d]" /><h2 className="font-serif text-3xl">No stories found</h2><p className="mt-2 text-[#68736d]">Try another search or category.</p></div> : <>
+          <section className="grid gap-8 border-b border-[#1e2926]/20 pb-10 lg:grid-cols-[1.35fr_0.65fr]"><Link to={`/news/${lead.id}`} className="group block"><div className="relative aspect-[16/8] overflow-hidden bg-[#d9d0c1]">{lead.cover_image_url ? <img src={lead.cover_image_url} alt="" className="h-full w-full object-cover grayscale-[15%] transition duration-500 group-hover:scale-105" /> : <div className="flex h-full items-end bg-[#304943] p-8"><span className="font-serif text-6xl italic text-[#e8d8bb]/30">EK</span></div>}<span className="absolute left-4 top-4 bg-[#b36b3b] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">Lead story</span></div><div className="pt-5"><div className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[#b36b3b]">{lead.category || 'Community'} · {formatDate(lead.published_at)}</div><h2 className="max-w-4xl font-serif text-3xl font-bold leading-tight tracking-[-0.02em] md:text-5xl">{lead.title}</h2><p className="mt-4 max-w-2xl font-serif text-lg leading-relaxed text-[#68736d]">{lead.excerpt || lead.content?.slice(0, 220)}{(lead.excerpt || lead.content)?.length > 220 ? '…' : ''}</p><span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#1e2926]">Read full story <ArrowUpRight className="h-4 w-4 text-[#b36b3b]" /></span></div></Link><aside className="border-t border-[#1e2926]/20 pt-5 lg:border-l lg:border-t-0 lg:pl-8"><p className="mb-5 font-serif text-2xl font-bold">Why it matters</p><p className="font-serif text-lg leading-relaxed text-[#68736d]">MyTownpedia connects residents to verified local information, public opportunities and the people shaping Ekiti’s future.</p><div className="mt-8 border-t border-[#1e2926]/20 pt-5 text-xs uppercase tracking-[0.16em] text-[#68736d]">A trusted local briefing</div></aside></section>
+          <section className="pt-8"><div className="mb-5 flex items-center justify-between"><h2 className="font-serif text-3xl font-bold">Latest dispatches</h2><span className="text-xs font-bold uppercase tracking-[0.16em] text-[#68736d]">{latest.length} stories</span></div><div className="divide-y divide-[#1e2926]/20 border-y border-[#1e2926]/20">{latest.map((article) => <Link key={article.id} to={`/news/${article.id}`} className="group grid gap-4 py-5 md:grid-cols-[1fr_220px] md:items-center"><div><div className="mb-2 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[#b36b3b]"><span>{article.category || 'Community'}</span><span className="text-[#68736d]">{formatDate(article.published_at)}</span></div><h3 className="font-serif text-2xl font-bold leading-tight group-hover:text-[#b36b3b]">{article.title}</h3><p className="mt-2 line-clamp-2 max-w-3xl font-serif text-sm leading-relaxed text-[#68736d]">{article.excerpt || article.content?.slice(0, 180)}</p><div className="mt-3 flex items-center gap-3 text-[10px] uppercase tracking-[0.12em] text-[#68736d]"><span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {formatDate(article.published_at)}</span><span className="flex items-center gap-1"><Eye className="h-3 w-3" /> {article.view_count || 0}</span></div></div><div className="hidden aspect-[16/9] overflow-hidden bg-[#d9d0c1] md:block">{article.cover_image_url && <img src={article.cover_image_url} alt="" className="h-full w-full object-cover grayscale-[15%] transition duration-500 group-hover:scale-105" />}</div></Link>)}</div></section>
+        </>}
       </div>
-    </>
-  );
+    </main>
+  </>;
 }
