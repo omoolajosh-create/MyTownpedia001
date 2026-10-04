@@ -554,17 +554,22 @@ export default function Home() {
           <ScrollReveal>
             <div className="max-w-3xl mx-auto text-center space-y-8">
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary-foreground">
-                Share Your Story
+                Help communities be seen, heard and supported
               </h2>
               <p className="text-lg text-primary-foreground/80 max-w-xl mx-auto">
-                Every story matters. Add your voice to our collective memory and help preserve our rich cultural heritage for generations.
+                Every story matters. Explore our impact work and see how MyTownpedia is growing from a heritage archive into a trusted local opportunity platform.
               </p>
-              <Button asChild size="lg" variant="secondary" className="text-base group shadow-lg">
-                <Link to="/submit">
-                  Submit Your Story
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
+              <div className="flex flex-col justify-center gap-3 sm:flex-row">
+                <Button asChild size="lg" variant="secondary" className="text-base group shadow-lg">
+                  <Link to="/submit">
+                    Submit Your Story
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 hover:text-primary-foreground">
+                  <Link to="/impact">Explore our impact</Link>
+                </Button>
+              </div>
             </div>
           </ScrollReveal>
         </div>

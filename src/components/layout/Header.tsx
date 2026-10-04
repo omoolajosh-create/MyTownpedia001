@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, User, LogOut, Shield, BookOpen, MapPin, Calendar, DollarSign, Heart, Globe, Clock, Newspaper } from 'lucide-react'
+import { Menu, X, User, LogOut, Shield, BookOpen, MapPin, Calendar, DollarSign, Heart, Globe, Clock, Newspaper, HandHeart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/integrations/supabase/client'
@@ -27,6 +27,7 @@ export const Header = () => {
     { label: 'Heritage', href: '/heritage/timeline', icon: Heart },
     { label: 'Events', href: '/events', icon: Calendar },
     { label: 'Crowdfunding', href: '/crowdfunding', icon: DollarSign },
+    { label: 'Impact', href: '/impact', icon: HandHeart },
   ]
 
   const handleSignOut = async () => {

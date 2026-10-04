@@ -60,6 +60,7 @@ import NewsDetail from "./pages/News/NewsDetail";
 import AdminNewsForm from "./pages/Admin/AdminNewsForm";
 import AdminNewsManagement from "./pages/Admin/AdminNewsManagement";
 import ContentApprovalDashboard from "./pages/Admin/ContentApprovalDashboard";
+import Impact from "./pages/Impact";
 
 const queryClient = new QueryClient();
 
@@ -159,6 +160,7 @@ const App = () => (
             <Route path="/crowdfunding/:id" element={<CampaignDetail />} />
             <Route path="/crowdfunding/create" element={<ProtectedRoute><CreateCampaign /></ProtectedRoute>} />
             <Route path="/about" element={<About />} />
+            <Route path="/impact" element={<Impact />} />
             <Route path="/install" element={<Install />} />
             <Route path="/time-capsule" element={<TimeCapsuleList />} />
             <Route path="/time-capsule/create" element={<ProtectedRoute><CreateTimeCapsule /></ProtectedRoute>} />
