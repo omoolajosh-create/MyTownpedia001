@@ -62,6 +62,7 @@ export const Footer = () => {
                 { label: 'Towns', href: '/towns' },
                 { label: 'Stories', href: '/stories' },
                 { label: 'News', href: '/news' },
+                { label: 'Opportunities Desk', href: '/opportunities' },
                 { label: 'Heritage Timeline', href: '/heritage/timeline' },
               ].map((link) => (
                 <li key={link.href}>

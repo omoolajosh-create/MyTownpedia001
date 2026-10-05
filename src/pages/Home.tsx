@@ -62,8 +62,8 @@ export default function Home() {
   return (
     <Layout>
       <SEOHead
-        title="MyTownpedia – African Town Stories"
-        description="Discover and share African town stories, traditions, and heritage. Preserve community memories, explore time capsules, and connect with your roots."
+        title="MyTownpedia – Community Intelligence for Ekiti"
+        description="Trusted community intelligence for Ekiti: local news, scholarships, jobs, public opportunities, town stories and heritage."
         type="website"
       />
 
@@ -82,7 +82,7 @@ export default function Home() {
               <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold tracking-tight text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]" style={{ animationDelay: '0.1s' }}>
                 MyTownpedia
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 mt-4 font-medium drop-shadow-lg">Discover African Town Stories</p>
+              <p className="text-xl md:text-2xl text-white/90 mt-4 font-medium drop-shadow-lg">Community Intelligence for Ekiti</p>
             </div>
             
             {/* Origin Badge */}
@@ -93,7 +93,7 @@ export default function Home() {
             
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed backdrop-blur-md bg-black/40 p-6 rounded-2xl border border-white/10 animate-fade-in shadow-2xl" style={{ animationDelay: '0.3s' }}>
-              Dedicated to giving recognition to local communities like <span className="font-semibold text-white">Araromi Obo Ekiti</span>, nestled near the vibrant city of Ado-Ekiti, we are building a digital archive that preserves the unique stories, traditions, and heritage of African towns.
+              From local updates and public opportunities to scholarships, jobs, town stories and heritage, MyTownpedia helps Ekiti residents find what matters and helps communities be seen, heard and supported.
             </p>
             
             {/* CTA Buttons */}
@@ -175,6 +175,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Opportunity Desk */}
+      <section className="py-20 bg-[#304943] text-[#f7f3ec]">
+        <div className="container mx-auto px-4">
+          <ScrollReveal>
+            <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+              <div>
+                <span className="text-sm font-medium uppercase tracking-wide text-[#e4b27b]">The Opportunity Desk</span>
+                <h2 className="mt-3 font-serif text-3xl font-bold leading-tight md:text-5xl">Do not miss the door that could change your next chapter.</h2>
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#f7f3ec]/75">Find official scholarships, student funding, employment, skills training and Ekiti opportunities in one clear, safety-first place.</p>
+                <Button asChild size="lg" className="mt-7 bg-[#e4b27b] text-[#1e2926] hover:bg-[#f2c995]"><Link to="/opportunities">Explore opportunities <ArrowRight className="ml-2 h-4 w-4" /></Link></Button>
+              </div>
+              <div className="grid grid-cols-2 gap-3 text-sm"><div className="border border-white/20 p-5"><GraduationCap className="mb-5 h-6 w-6 text-[#e4b27b]" /><strong className="block font-serif text-xl">Scholarships</strong><span className="mt-1 block text-[#f7f3ec]/60">Federal and Ekiti sources</span></div><div className="border border-white/20 p-5"><Users className="mb-5 h-6 w-6 text-[#e4b27b]" /><strong className="block font-serif text-xl">Employment</strong><span className="mt-1 block text-[#f7f3ec]/60">Jobs and skills pathways</span></div><div className="border border-white/20 p-5"><Heart className="mb-5 h-6 w-6 text-[#e4b27b]" /><strong className="block font-serif text-xl">Safer access</strong><span className="mt-1 block text-[#f7f3ec]/60">Official links, no fees</span></div><div className="border border-white/20 p-5"><MapPin className="mb-5 h-6 w-6 text-[#e4b27b]" /><strong className="block font-serif text-xl">Local first</strong><span className="mt-1 block text-[#f7f3ec]/60">Relevant to our communities</span></div></div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
       {/* Local News & Community Updates */}
       <section className="py-20">
         <div className="container mx-auto px-4">
