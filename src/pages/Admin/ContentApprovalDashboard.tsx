@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import {
   Table,
   TableBody,
@@ -52,6 +53,9 @@ export default function ContentApprovalDashboard() {
   const [showPreview, setShowPreview] = useState(false);
   const [rejectionNotes, setRejectionNotes] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [typeFilter, setTypeFilter] = useState('all');
+  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
 
   useEffect(() => {
     if (authLoading) return;
@@ -186,6 +190,11 @@ export default function ContentApprovalDashboard() {
     }
   };
 
+  const visibleContent = [...pendingContent]
+    .filter((content) => typeFilter === 'all' || content.content_type === typeFilter || content.category === typeFilter)
+    .filter((content) => `${content.rewritten_title || content.original_title} ${content.category} ${content.content_type}`.toLowerCase().includes(searchQuery.toLowerCase()))
+    .sort((a, b) => sortOrder === 'newest' ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime() : new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+  const availableTypes = Array.from(new Set(pendingContent.flatMap((content) => [content.content_type, content.category]).filter(Boolean)));
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
@@ -283,9 +292,17 @@ export default function ContentApprovalDashboard() {
           ) : (
             <Card>
               <CardHeader>
-                <CardTitle>Pending Content</CardTitle>
+                <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+                  <div><CardTitle>Pending Content</CardTitle><p className="mt-1 text-sm text-muted-foreground">Filter the queue before you review.</p></div>
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search title, type or category" className="w-full md:w-64" />
+                    <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="h-10 rounded-md border border-input bg-background px-3 text-sm"><option value="all">All types</option>{availableTypes.map((type) => <option key={type} value={type}>{type}</option>)}</select>
+                    <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value as 'newest' | 'oldest')} className="h-10 rounded-md border border-input bg-background px-3 text-sm"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
+                <div className="mb-4 text-xs text-muted-foreground">Showing {visibleContent.length} of {pendingContent.length} pending items</div>
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
@@ -300,7 +317,7 @@ export default function ContentApprovalDashboard() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {pendingContent.map((content) => (
+                      {visibleContent.map((content) => (
                         <TableRow key={content.id}>
                           <TableCell className="font-medium max-w-xs truncate">
                             {content.rewritten_title || content.original_title}
