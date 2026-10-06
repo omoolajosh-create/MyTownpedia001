@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, BookOpen, Users, MapPin, Heart, Calendar, DollarSign, Eye, Sparkles, History, Clock, Download } from 'lucide-react'
+import { ArrowRight, BookOpen, Users, MapPin, Heart, GraduationCap, Calendar, DollarSign, Eye, Sparkles, History, Clock, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
