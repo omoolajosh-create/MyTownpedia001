@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     VitePWA({
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'pwa-sw.ts',
       registerType: 'prompt',
       includeAssets: ['favicon.ico', 'robots.txt', 'icon-512.png', 'icon-maskable.png'],
       devOptions: {

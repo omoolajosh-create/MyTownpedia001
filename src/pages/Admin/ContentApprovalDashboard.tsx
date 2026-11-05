@@ -22,10 +22,11 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog';
-import { ArrowLeft, Check, X, Eye, Loader2, RefreshCw } from 'lucide-react';
+import { ArrowLeft, Check, X, Eye, Loader2, RefreshCw, Bell, BellOff } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 import { Helmet } from 'react-helmet-async';
+import { usePushNotifications } from '@/hooks/usePushNotifications';
 
 interface PendingContent {
   id: string;
@@ -56,6 +57,12 @@ export default function ContentApprovalDashboard() {
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
+  const push = usePushNotifications(user?.id, isAdmin);
+  const enablePush = async () => {
+    try { await push.enable(); toast({ title: 'Notifications enabled', description: 'You will be alerted when new content is waiting for approval.' }); }
+    catch (error: any) { toast({ title: 'Notifications not enabled', description: error?.message || 'Allow notifications in your browser settings and try again.', variant: 'destructive' }); }
+  };
+  const disablePush = async () => { await push.disable(); toast({ title: 'Notifications paused', description: 'You can enable them again at any time.' }); };
 
   useEffect(() => {
     if (authLoading) return;
@@ -262,14 +269,14 @@ export default function ContentApprovalDashboard() {
                   <p className="text-sm text-muted-foreground">Processing</p>
                 </CardContent>
               </Card>
-              <Button
-                onClick={fetchPendingContent}
-                variant="outline"
-                className="h-auto"
-              >
-                <RefreshCw className="h-4 w-4 mr-2" />
-                Refresh
-              </Button>
+              <div className="flex h-auto flex-col gap-2">
+                {push.supported && (push.enabled ? (
+                  <Button onClick={disablePush} variant="outline" className="h-auto"><BellOff className="mr-2 h-4 w-4" /> Notifications on</Button>
+                ) : (
+                  <Button onClick={enablePush} disabled={push.busy} className="h-auto"><Bell className="mr-2 h-4 w-4" /> {push.busy ? 'Enabling…' : 'Enable notifications'}</Button>
+                ))}
+                <Button onClick={fetchPendingContent} variant="outline" className="h-auto"><RefreshCw className="mr-2 h-4 w-4" /> Refresh</Button>
+              </div>
             </div>
           </div>
         </div>
